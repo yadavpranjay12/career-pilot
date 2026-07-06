@@ -10,7 +10,7 @@ CREATE TABLE companies (
     updated_at   TIMESTAMP NOT NULL DEFAULT now(),
     career_page_url  VARCHAR(255),
        application_url  VARCHAR(255),
-       is_hiring        BOOLEAN NOT NULL DEFAULT FALSE;
+       is_hiring        BOOLEAN NOT NULL DEFAULT FALSE,
     CONSTRAINT uq_companies_name UNIQUE (name)
 );
 
