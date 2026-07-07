@@ -35,4 +35,28 @@ public class GlobalExceptionHandler {
         problem.setTitle("Validation Failed");
         return problem;
     }
+
+    // add alongside the existing handlers from Phases 3–4
+
+    @ExceptionHandler({ProblemNotFoundException.class, GoalNotFoundException.class})
+    public ProblemDetail handleLearningNotFound(RuntimeException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        problem.setTitle("Resource Not Found");
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidGoalProgressException.class)
+    public ProblemDetail handleInvalidGoalProgress(InvalidGoalProgressException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problem.setTitle("Invalid Goal Progress");
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidRevisionException.class)
+    public ProblemDetail handleInvalidRevision(InvalidRevisionException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
+        problem.setTitle("Invalid Problem Revision Data");
+        return problem;
+    }
+
 }
