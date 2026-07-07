@@ -66,6 +66,20 @@ public class GlobalExceptionHandler {
         problem.setTitle("Application Not Found");
         return problem;
     }
+    @ExceptionHandler({ResumeNotFoundException.class, InterviewExperienceNotFoundException.class})
+    public ProblemDetail handleCareerManagementNotFound(RuntimeException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        problem.setTitle("Resource Not Found");
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidResumeException.class)
+    public ProblemDetail handleInvalidResume(InvalidResumeException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problem.setTitle("Invalid Resume Operation");
+        return problem;
+    }
+
 
     @ExceptionHandler(DuplicateApplicationException.class)
     public ProblemDetail handleDuplicateApplication(DuplicateApplicationException ex) {
