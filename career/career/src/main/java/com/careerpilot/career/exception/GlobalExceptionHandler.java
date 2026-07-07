@@ -58,5 +58,35 @@ public class GlobalExceptionHandler {
         problem.setTitle("Invalid Problem Revision Data");
         return problem;
     }
+    // add alongside the existing handlers from Phase 3
+
+    @ExceptionHandler(ApplicationNotFoundException.class)
+    public ProblemDetail handleApplicationNotFound(ApplicationNotFoundException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        problem.setTitle("Application Not Found");
+        return problem;
+    }
+
+    @ExceptionHandler(DuplicateApplicationException.class)
+    public ProblemDetail handleDuplicateApplication(DuplicateApplicationException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problem.setTitle("Duplicate Application");
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidStatusTransitionException.class)
+    public ProblemDetail handleInvalidStatusTransition(InvalidStatusTransitionException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, ex.getMessage());
+        problem.setTitle("Invalid Status Transition");
+        return problem;
+    }
+
+    @ExceptionHandler(InvalidApplicationDateException.class)
+    public ProblemDetail handleInvalidApplicationDate(InvalidApplicationDateException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage());
+        problem.setTitle("Invalid Application Date");
+        return problem;
+    }
+
 
 }
