@@ -1,6 +1,7 @@
 package com.careerpilot.career.repository;
 
 import com.careerpilot.career.domain.Goal;
+import com.careerpilot.career.domain.GoalStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,6 @@ import java.util.UUID;
 
 public interface GoalRepository extends JpaRepository<Goal, UUID>, JpaSpecificationExecutor<Goal> {
     Page<Goal> findByUserId(UUID userId, Pageable pageable);
+
+    long countByUserIdAndStatus(UUID userId, GoalStatus goalStatus);
 }
