@@ -6,7 +6,10 @@ import { PublicRoute } from './PublicRoute';
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
 
-// Placeholders preventing crash before next phases
+// 1. Add the Dashboard import here
+import { Dashboard } from '../pages/dashboard/Dashboard';
+
+// Placeholders for remaining phases
 const Placeholder = ({ title }) => (
   <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
     <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
@@ -29,7 +32,10 @@ export const AppRouter = () => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Placeholder title="Dashboard" />} />
+            
+            {/* 2. Replace the Dashboard placeholder with the actual component */}
+            <Route path="/" element={<Dashboard />} />
+            
             <Route path="/companies" element={<Placeholder title="Company Module" />} />
             <Route path="/applications" element={<Placeholder title="Applications Module" />} />
             <Route path="/learning" element={<Placeholder title="Learning Module" />} />

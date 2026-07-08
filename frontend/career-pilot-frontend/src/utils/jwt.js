@@ -12,8 +12,8 @@ export const getUserIdFromToken = () => {
     );
     
     const payload = JSON.parse(jsonPayload);
-    // Assuming the Spring Security JWT uses the 'sub' claim for the userId (UUID)
-    return payload.sub;
+    // Use payload.userId as per the backend JWT structure
+    return payload.userId;
   } catch (error) {
     console.error("Failed to decode JWT:", error);
     return null;
