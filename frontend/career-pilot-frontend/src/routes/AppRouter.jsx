@@ -5,11 +5,12 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
-
-// 1. Add the Dashboard import here
 import { Dashboard } from '../pages/dashboard/Dashboard';
 
-// Placeholders for remaining phases
+// 1. IMPORT THE NEW COMPANIES PAGE
+import { Companies } from '../pages/company/Companies';
+
+// Placeholders preventing crash before next phases
 const Placeholder = ({ title }) => (
   <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
     <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
@@ -21,7 +22,6 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Routes (Only accessible when NOT logged in) */}
         <Route element={<PublicRoute />}>
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
@@ -29,20 +29,18 @@ export const AppRouter = () => {
           </Route>
         </Route>
 
-        {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
-            
-            {/* 2. Replace the Dashboard placeholder with the actual component */}
             <Route path="/" element={<Dashboard />} />
             
-            <Route path="/companies" element={<Placeholder title="Company Module" />} />
+            {/* 2. REPLACE THE PLACEHOLDER WITH THE ACTUAL ROUTE */}
+            <Route path="/companies" element={<Companies />} />
+            
             <Route path="/applications" element={<Placeholder title="Applications Module" />} />
             <Route path="/learning" element={<Placeholder title="Learning Module" />} />
           </Route>
         </Route>
 
-        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
