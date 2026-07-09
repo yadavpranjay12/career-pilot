@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
+import { GoalPage } from '../pages/goal/GoalPage';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
 
@@ -12,6 +12,7 @@ import { Register } from '../pages/auth/Register';
 import { Dashboard } from '../pages/dashboard/Dashboard';
 import { Companies } from '../pages/company/Companies';
 import { Applications } from '../pages/application/Applications';
+
 
 // Placeholder pages for future modules
 const Placeholder = ({ title }) => (
@@ -47,6 +48,9 @@ export const AppRouter = () => {
             {/* Dashboard */}
             <Route path="/" element={<Dashboard />} />
 
+            {/* Goal Module */}
+            <Route path="/goals" element={<GoalPage />} />
+
             {/* Company Module */}
             <Route path="/companies" element={<Companies />} />
 
@@ -54,11 +58,6 @@ export const AppRouter = () => {
             <Route path="/applications" element={<Applications />} />
 
             {/* Future Modules */}
-            <Route
-              path="/learning"
-              element={<Placeholder title="Learning Module" />}
-            />
-
             <Route
               path="/resume"
               element={<Placeholder title="Resume Module" />}

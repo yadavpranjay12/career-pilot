@@ -5,9 +5,12 @@ import { FiHome, FiBriefcase, FiFileText, FiTarget } from 'react-icons/fi';
 export const Sidebar = () => {
   const links = [
     { name: 'Dashboard', path: '/', icon: <FiHome className="w-5 h-5" /> },
+    { name: 'Goals',
+    path: '/goals',
+    icon: <FiTarget className="w-5 h-5" /> },
     { name: 'Companies', path: '/companies', icon: <FiBriefcase className="w-5 h-5" /> },
     { name: 'Applications', path: '/applications', icon: <FiFileText className="w-5 h-5" /> },
-    { name: 'Learning', path: '/learning', icon: <FiTarget className="w-5 h-5" /> },
+    
   ];
 
   return (
