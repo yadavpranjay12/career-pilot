@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GoalPage } from '../pages/goal/GoalPage';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
-
+import { ResumePage } from "../pages/resume/ResumePage";
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
 
@@ -58,11 +58,11 @@ export const AppRouter = () => {
             <Route path="/applications" element={<Applications />} />
 
             {/* Future Modules */}
-            <Route
-              path="/resume"
-              element={<Placeholder title="Resume Module" />}
-            />
-
+           
+<Route
+    path="/resume"
+    element={<ResumePage />}
+/>
             <Route
               path="/interviews"
               element={<Placeholder title="Interview Module" />}

@@ -100,14 +100,15 @@ public class ResumeServiceImpl implements ResumeService {
                     resumeRepository.save(current);
                 });
 
+        resumeRepository.flush();   // <-- add this
+
         resume.setDefault(true);
+
         if (resume.getStatus() == ResumeStatus.DRAFT) {
             resume.setStatus(ResumeStatus.ACTIVE);
         }
 
-        return ResumeMapper.toResponse(resumeRepository.save(resume));
-    }
-
+        return ResumeMapper.toResponse(resumeRepository.saveAndFlush(resume));}
     @Override
     @Transactional
     public ResumeResponse archiveResume(UUID id) {
