@@ -26,4 +26,12 @@ public final class CompanySpecifications {
         return (root, query, cb) ->
                 size == null ? null : cb.equal(root.get("size"), size);
     }
+
+    public static Specification<Company> isHiring(Boolean isHiring) {
+        return (root, query, cb) ->
+                isHiring == null
+                        ? null
+                        : cb.equal(root.get("isHiring"), isHiring);
+
+    }
 }

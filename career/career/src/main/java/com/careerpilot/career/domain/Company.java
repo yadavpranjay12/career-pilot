@@ -1,5 +1,6 @@
 package com.careerpilot.career.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -48,6 +49,7 @@ public class Company extends BaseAuditEntity {
 
     @Column(name = "is_hiring", nullable = false)
     @Builder.Default
+    @JsonProperty("isHiring")
     private boolean isHiring = false;
 
     @Column(name = "location", length = 150)

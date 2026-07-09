@@ -55,9 +55,16 @@ public class CompanyController {
     public ResponseEntity<Page<CompanyResponse>> search(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String industry,
-            @RequestParam(required = false) CompanySize size,
+            @RequestParam(required = false) CompanySize size,@RequestParam(required = false) Boolean isHiring,
             Pageable pageable
     ) {
-        return ResponseEntity.ok(companyService.searchCompanies(keyword, industry, size, pageable));
-    }
+        return ResponseEntity.ok(
+                companyService.searchCompanies(
+                        keyword,
+                        industry,
+                        size,
+                        isHiring,
+                        pageable
+                )
+        );}
 }

@@ -1,20 +1,25 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
+
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
+
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
+
 import { Dashboard } from '../pages/dashboard/Dashboard';
-
-// 1. IMPORT THE NEW COMPANIES PAGE
 import { Companies } from '../pages/company/Companies';
+import { Applications } from '../pages/application/Applications';
 
-// Placeholders preventing crash before next phases
+// Placeholder pages for future modules
 const Placeholder = ({ title }) => (
   <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
     <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-    <p className="text-gray-500 mt-2">Implementation pending in next phase.</p>
+    <p className="text-gray-500 mt-2">
+      Implementation pending in next phase.
+    </p>
   </div>
 );
 
@@ -22,6 +27,10 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+
+        {/* ===================== */}
+        {/* Public Routes */}
+        {/* ===================== */}
         <Route element={<PublicRoute />}>
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
@@ -29,19 +38,48 @@ export const AppRouter = () => {
           </Route>
         </Route>
 
+        {/* ===================== */}
+        {/* Protected Routes */}
+        {/* ===================== */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
+
+            {/* Dashboard */}
             <Route path="/" element={<Dashboard />} />
-            
-            {/* 2. REPLACE THE PLACEHOLDER WITH THE ACTUAL ROUTE */}
+
+            {/* Company Module */}
             <Route path="/companies" element={<Companies />} />
-            
-            <Route path="/applications" element={<Placeholder title="Applications Module" />} />
-            <Route path="/learning" element={<Placeholder title="Learning Module" />} />
+
+            {/* Internship Application Module */}
+            <Route path="/applications" element={<Applications />} />
+
+            {/* Future Modules */}
+            <Route
+              path="/learning"
+              element={<Placeholder title="Learning Module" />}
+            />
+
+            <Route
+              path="/resume"
+              element={<Placeholder title="Resume Module" />}
+            />
+
+            <Route
+              path="/interviews"
+              element={<Placeholder title="Interview Module" />}
+            />
+
+            <Route
+              path="/profile"
+              element={<Placeholder title="Profile Module" />}
+            />
+
           </Route>
         </Route>
 
+        {/* Catch All */}
         <Route path="*" element={<Navigate to="/" replace />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -15,5 +15,11 @@ public interface CompanyService {
     CompanyResponse updateCompany(UUID id, UpdateCompanyRequest request);
     void deleteCompany(UUID id);
     Page<CompanyResponse> listCompanies(Pageable pageable);
-    Page<CompanyResponse> searchCompanies(String keyword, String industry, CompanySize size, Pageable pageable);
+    Page<CompanyResponse> searchCompanies(
+            String keyword,
+            String industry,
+            CompanySize size,
+            Boolean isHiring,
+            Pageable pageable
+    );
 }

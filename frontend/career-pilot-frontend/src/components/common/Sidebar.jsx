@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiHome, FiBriefcase, FiFileText, FiTarget } from 'react-icons/fi';
 
@@ -10,10 +11,11 @@ export const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 shrink-0 bg-white border-r border-orange-100 hidden lg:flex flex-col shadow-sm z-20">
-      <div className="h-20 shrink-0 flex items-center px-8 border-b border-orange-50">
+    <aside className="w-64 flex-shrink-0 bg-white border-r border-orange-100 flex flex-col shadow-sm z-20 h-screen">
+      <div className="h-20 flex-shrink-0 flex items-center px-8 border-b border-orange-50">
         <h1 className="text-2xl font-black tracking-tighter text-orange-600">CareerPilot</h1>
       </div>
+      
       <nav className="flex-1 py-8 px-4 space-y-2 overflow-y-auto">
         {links.map((link) => (
           <NavLink

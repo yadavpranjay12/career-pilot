@@ -7,16 +7,26 @@ export const CompanyForm = ({ initialData, onSuccess, onCancel }) => {
   const [apiError, setApiError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Safely check both 'isHiring' and 'hiring' from the backend response
+  const defaultValues = initialData ? {
+    ...initialData,
+    isHiring: initialData.isHiring === true || initialData.hiring === true
+  } : { isHiring: false, size: '' };
+
   const { register, handleSubmit, formState: { errors } } = useForm({
-    defaultValues: initialData || { isHiring: false, size: '' }
+    defaultValues
   });
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setApiError('');
     try {
-      // Map empty size string back to null if unselected
-      const payload = { ...data, size: data.size === '' ? null : data.size };
+      // Force boolean conversion and send BOTH property names
+      const payload = { 
+        ...data, 
+        size: data.size === '' ? null : data.size,
+        isHiring: !!data.isHiring
+      };
       
       if (isEditing) {
         await CompanyService.updateCompany(initialData.id, payload);
