@@ -5,7 +5,7 @@ import {
   FiBriefcase,
   FiFileText,
   FiTarget,
-  FiFile,
+  FiFile,FiUser
 } from 'react-icons/fi';
 
 export const Sidebar = () => {
@@ -14,7 +14,7 @@ export const Sidebar = () => {
       name: 'Dashboard',
       path: '/',
       icon: <FiHome className="w-5 h-5" />,
-    },
+    },{ path: "/profile", name: "Profile", icon: <FiUser className="w-5 h-5" /> , },
     {
       name: 'Companies',
       path: '/companies',

@@ -5,7 +5,7 @@ import { MainLayout } from '../layouts/MainLayout';
 import { ResumePage } from "../pages/resume/ResumePage";
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicRoute } from './PublicRoute';
-
+import { ProfilePage } from "../pages/profile/ProfilePage";
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
 
@@ -68,10 +68,10 @@ export const AppRouter = () => {
               element={<Placeholder title="Interview Module" />}
             />
 
-            <Route
-              path="/profile"
-              element={<Placeholder title="Profile Module" />}
-            />
+           <Route
+  path="/profile"
+  element={<ProfilePage />}
+/>
 
           </Route>
         </Route>

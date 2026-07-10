@@ -3,7 +3,7 @@ import {
   FiTarget,
   FiBriefcase,
   FiFileText,
-  FiFile,
+  FiFile,FiUser
 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
@@ -13,7 +13,11 @@ export const Sidebar = () => {
       path: "/",
       label: "Dashboard",
       icon: FiLayout,
-    },
+    },{  path: "/profile",
+  label: "Profile",
+
+  icon: FiUser ,
+},
     {
       path: "/companies",
       label: "Companies",
