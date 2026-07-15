@@ -36,6 +36,11 @@ public class DashboardServiceImpl implements DashboardService {
         long totalApplications = applicationsByStatus.values().stream().mapToLong(Long::longValue).sum();
         long offerCount = applicationsByStatus.getOrDefault(ApplicationStatus.OFFER, 0L);
 
+        long interviewCount =
+                applicationsByStatus.getOrDefault(
+                        ApplicationStatus.INTERVIEW,
+                        0L
+                );
         return new DashboardResponse(
                 companyRepository.count(),
                 totalApplications,

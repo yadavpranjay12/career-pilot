@@ -2,6 +2,7 @@ package com.careerpilot.career.controller;
 
 import com.careerpilot.career.domain.ProblemDifficulty;
 import com.careerpilot.career.domain.ProblemStatus;
+import com.careerpilot.career.domain.ProblemTopic;
 import com.careerpilot.career.dto.request.*;
 import com.careerpilot.career.dto.response.ProblemResponse;
 import com.careerpilot.career.service.ProblemService;
@@ -54,7 +55,8 @@ public class ProblemController {
     public ResponseEntity<Page<ProblemResponse>> search(
             @RequestParam UUID userId,
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String topic,
+            @RequestParam(required = false)
+            ProblemTopic topic,
             @RequestParam(required = false) ProblemDifficulty difficulty,
             @RequestParam(required = false) ProblemStatus status,
             Pageable pageable

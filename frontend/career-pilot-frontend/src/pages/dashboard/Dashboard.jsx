@@ -7,6 +7,7 @@ import { ApplicationStatusChart } from './charts/ApplicationStatusChart';
 import { GoalProgressChart } from './charts/GoalProgressChart';
 import { RecentApplicationsWidget } from './widgets/RecentApplicationsWidget';
 import { UpcomingGoalsWidget } from './widgets/UpcomingGoalsWidget';
+
 import { 
   FiBriefcase, 
   FiFileText, 
@@ -45,11 +46,7 @@ export const Dashboard = () => {
           value={stats.totalCompanies} 
           icon={<FiBriefcase />}
         />
-        <StatCard 
-          title="Interviews Secured" 
-          value={stats.interviewCount} 
-          icon={<FiAward />}
-        />
+       
         <StatCard 
           title="Total Offers" 
           value={stats.offerCount} 
@@ -88,7 +85,10 @@ export const Dashboard = () => {
               <h3 className="text-xl saas-heading">Active Goal Progress</h3>
            </div>
            <div className="p-6 h-[400px]">
-             <GoalProgressChart goals={upcomingGoals} />
+     <GoalProgressChart
+    activeGoals={stats?.activeGoals ?? 0}
+    completedGoals={stats?.completedGoals ?? 0}
+/>
            </div>
         </div>
       </div>

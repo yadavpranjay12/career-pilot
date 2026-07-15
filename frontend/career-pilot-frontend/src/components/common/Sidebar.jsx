@@ -5,7 +5,7 @@ import {
   FiBriefcase,
   FiFileText,
   FiTarget,
-  FiFile,FiUser
+  FiFile,FiUser,FiCode
 } from 'react-icons/fi';
 
 export const Sidebar = () => {
@@ -35,6 +35,11 @@ export const Sidebar = () => {
       path: '/goals',
       icon: <FiTarget className="w-5 h-5" />,
     },
+   {name: "Problems",
+    path: "/problems",
+    
+    icon: <FiCode className="w-5 h-5" />,
+}
   ];
 
   return (

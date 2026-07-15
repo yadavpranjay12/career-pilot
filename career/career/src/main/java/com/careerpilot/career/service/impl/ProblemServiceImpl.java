@@ -3,6 +3,7 @@ package com.careerpilot.career.service.impl;
 import com.careerpilot.career.domain.Problem;
 import com.careerpilot.career.domain.ProblemDifficulty;
 import com.careerpilot.career.domain.ProblemStatus;
+import com.careerpilot.career.domain.ProblemTopic;
 import com.careerpilot.career.dto.request.*;
 import com.careerpilot.career.dto.response.ProblemResponse;
 import com.careerpilot.career.exception.InvalidRevisionException;
@@ -99,7 +100,12 @@ public class ProblemServiceImpl implements ProblemService {
     @Override
     @Transactional(readOnly = true)
     public Page<ProblemResponse> searchProblems(
-            UUID userId, String keyword, String topic, ProblemDifficulty difficulty, ProblemStatus status, Pageable pageable) {
+            UUID userId,
+            String keyword,
+            ProblemTopic topic,
+            ProblemDifficulty difficulty,
+            ProblemStatus status,
+            Pageable pageable){
 
         Specification<Problem> spec = Specification
                 .where(ProblemSpecifications.belongsToUser(userId))
@@ -117,14 +123,20 @@ public class ProblemServiceImpl implements ProblemService {
         Problem problem = problemRepository.findById(id)
                 .orElseThrow(() -> new ProblemNotFoundException(id));
 
-        LocalDate solvedDate = request.solvedDate() != null ? request.solvedDate() : LocalDate.now();
-        validateRevisionOrdering(solvedDate, problem.getNextRevisionDate());
+        LocalDate solvedDate = request.solvedDate() != null
+                ? request.solvedDate()
+                : LocalDate.now();
 
         problem.setStatus(ProblemStatus.COMPLETED);
         problem.setSolvedDate(solvedDate);
 
-        return ProblemMapper.toResponse(problemRepository.save(problem));
-    }
+        if (problem.getNextRevisionDate() != null &&
+                problem.getNextRevisionDate().isBefore(solvedDate)) {
+
+            problem.setNextRevisionDate(null);
+        }
+
+        return ProblemMapper.toResponse(problemRepository.save(problem));}
 
     @Override
     @Transactional

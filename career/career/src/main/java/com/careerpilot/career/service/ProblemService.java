@@ -2,6 +2,7 @@ package com.careerpilot.career.service;
 
 import com.careerpilot.career.domain.ProblemDifficulty;
 import com.careerpilot.career.domain.ProblemStatus;
+import com.careerpilot.career.domain.ProblemTopic;
 import com.careerpilot.career.dto.request.*;
 import com.careerpilot.career.dto.response.ProblemResponse;
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ public interface ProblemService {
     void deleteProblem(UUID id);
     Page<ProblemResponse> getProblems(UUID userId, Pageable pageable);
     Page<ProblemResponse> searchProblems(
-            UUID userId, String keyword, String topic, ProblemDifficulty difficulty, ProblemStatus status, Pageable pageable
+            UUID userId, String keyword, ProblemTopic topic, ProblemDifficulty difficulty, ProblemStatus status, Pageable pageable
     );
     ProblemResponse markCompleted(UUID id, CompleteProblemRequest request);
     ProblemResponse incrementRevision(UUID id);

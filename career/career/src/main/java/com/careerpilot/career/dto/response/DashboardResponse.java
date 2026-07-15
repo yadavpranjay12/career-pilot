@@ -11,6 +11,6 @@ public record DashboardResponse(
         long totalProblemsSolved,
         long activeGoals,
         long completedGoals,
-        long interviewCount,
+        double acceptanceRate,
         long offerCount
 ) {}

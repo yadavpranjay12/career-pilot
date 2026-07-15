@@ -37,9 +37,9 @@ public class Problem extends BaseAuditEntity {
     @Column(name = "platform", length = 100)
     private String platform;
 
-    @Column(name = "topic", length = 100)
-    private String topic;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "topic", nullable = false, length = 50)
+    private ProblemTopic topic;
     @Enumerated(EnumType.STRING)
     @Column(name = "difficulty", nullable = false, length = 20)
     private ProblemDifficulty difficulty;

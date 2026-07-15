@@ -74,9 +74,7 @@ public class InternshipApplicationServiceImpl implements InternshipApplicationSe
 
         validateDeadline(request.applicationDate(), request.deadline());
 
-        if (!application.getStatus().canTransitionTo(request.status())) {
-            throw new InvalidStatusTransitionException(application.getStatus(), request.status());
-        }
+
 
         application.setJobTitle(request.jobTitle());
         application.setApplicationUrl(request.applicationUrl());

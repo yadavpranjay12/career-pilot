@@ -12,7 +12,7 @@ import { Register } from '../pages/auth/Register';
 import { Dashboard } from '../pages/dashboard/Dashboard';
 import { Companies } from '../pages/company/Companies';
 import { Applications } from '../pages/application/Applications';
-
+import { ProblemPage } from '../pages/problem/ProblemPage';
 
 // Placeholder pages for future modules
 const Placeholder = ({ title }) => (
@@ -56,7 +56,10 @@ export const AppRouter = () => {
 
             {/* Internship Application Module */}
             <Route path="/applications" element={<Applications />} />
-
+<Route
+    path="/problems"
+    element={<ProblemPage />}
+/>
             {/* Future Modules */}
            
 <Route

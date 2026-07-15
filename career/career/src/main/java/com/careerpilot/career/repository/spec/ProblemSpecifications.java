@@ -3,6 +3,7 @@ package com.careerpilot.career.repository.spec;
 import com.careerpilot.career.domain.Problem;
 import com.careerpilot.career.domain.ProblemDifficulty;
 import com.careerpilot.career.domain.ProblemStatus;
+import com.careerpilot.career.domain.ProblemTopic;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.UUID;
@@ -15,9 +16,16 @@ public final class ProblemSpecifications {
         return (root, query, cb) -> cb.equal(root.get("userId"), userId);
     }
 
-    public static Specification<Problem> hasTopic(String topic) {
+    public static Specification<Problem> hasTopic(
+            ProblemTopic topic
+    ) {
         return (root, query, cb) ->
-                topic == null || topic.isBlank() ? null : cb.equal(cb.lower(root.get("topic")), topic.toLowerCase());
+                topic == null
+                        ? null
+                        : cb.equal(
+                        root.get("topic"),
+                        topic
+                );
     }
 
     public static Specification<Problem> hasDifficulty(ProblemDifficulty difficulty) {

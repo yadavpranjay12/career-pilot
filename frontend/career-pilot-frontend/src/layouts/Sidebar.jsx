@@ -37,7 +37,11 @@ export const Sidebar = () => {
       path: "/goals",
       label: "Goals",
       icon: FiTarget,
-    },
+    },{
+    path: "/problems",
+    label: "Problems",
+    icon: FiCode,
+}
   ];
 
   return (

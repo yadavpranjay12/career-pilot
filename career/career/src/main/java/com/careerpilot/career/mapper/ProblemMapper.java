@@ -9,10 +9,21 @@ public final class ProblemMapper {
 
     public static ProblemResponse toResponse(Problem problem) {
         return new ProblemResponse(
-                problem.getId(), problem.getUserId(), problem.getTitle(), problem.getPlatform(),
-                problem.getTopic(), problem.getDifficulty(), problem.getStatus(), problem.getNotes(),
-                problem.getSolutionUrl(), problem.getSolvedDate(), problem.getRevisionCount(),
-                problem.getNextRevisionDate(), problem.getCreatedAt(), problem.getUpdatedAt()
+                problem.getId(),
+                problem.getUserId(),
+                problem.getTitle(),
+                problem.getPlatform(),
+                problem.getTopic(),
+                problem.getDifficulty(),
+                problem.getStatus(),
+                problem.getNotes(),
+                problem.getSolutionUrl(),
+                problem.getSolvedDate(),
+                problem.getRevisionCount(),
+                problem.getNextRevisionDate(),
+                problem.getCreatedAt(),
+                problem.getUpdatedAt()
         );
+
     }
 }
