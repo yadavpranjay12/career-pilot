@@ -10,12 +10,18 @@ import org.springframework.data.domain.Pageable;
 import java.util.UUID;
 
 public interface CompanyService {
-    CompanyResponse createCompany(CreateCompanyRequest request);
-    CompanyResponse getCompany(UUID id);
-    CompanyResponse updateCompany(UUID id, UpdateCompanyRequest request);
-    void deleteCompany(UUID id);
-    Page<CompanyResponse> listCompanies(Pageable pageable);
+    CompanyResponse createCompany(UUID userId, CreateCompanyRequest request);
+
+    CompanyResponse getCompany(UUID id, UUID userId);
+
+    CompanyResponse updateCompany(UUID id, UUID userId, UpdateCompanyRequest request);
+
+    void deleteCompany(UUID id, UUID userId);
+
+    Page<CompanyResponse> listCompanies(UUID userId, Pageable pageable);
+
     Page<CompanyResponse> searchCompanies(
+            UUID userId,
             String keyword,
             String industry,
             CompanySize size,
@@ -23,3 +29,4 @@ public interface CompanyService {
             Pageable pageable
     );
 }
+

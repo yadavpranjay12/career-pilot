@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,7 +13,8 @@ import java.util.UUID;
         name = "companies",
         indexes = {
                 @Index(name = "idx_companies_name", columnList = "name"),
-                @Index(name = "idx_companies_industry", columnList = "industry")
+                @Index(name = "idx_companies_industry", columnList = "industry"),
+                @Index(name = "idx_companies_user_id", columnList = "user_id") // Added index for faster user queries
         }
 )
 @Getter
@@ -25,7 +28,12 @@ public class Company extends BaseAuditEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "name", nullable = false, unique = true, length = 200)
+    // Added userId to link the company to the specific user
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
+
+    // Removed unique=true so different users can have companies with the same name
+    @Column(name = "name", nullable = false, length = 200)
     private String name;
 
     @Column(name = "industry", length = 100)
@@ -54,4 +62,7 @@ public class Company extends BaseAuditEntity {
 
     @Column(name = "location", length = 150)
     private String location;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<InternshipApplication> applications = new ArrayList<>();
 }

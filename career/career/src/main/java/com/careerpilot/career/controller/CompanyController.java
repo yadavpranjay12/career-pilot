@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.UUID;
 
 @RestController
@@ -22,49 +23,73 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
+    // Helper method to extract User ID from the Security Principal
+    private UUID getUserId(Principal principal) {
+        return UUID.fromString(principal.getName());
+    }
+
     @PostMapping
-    public ResponseEntity<CompanyResponse> create(@Valid @RequestBody CreateCompanyRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.createCompany(request));
+    public ResponseEntity<CompanyResponse> create(
+            Principal principal,
+            @Valid @RequestBody CreateCompanyRequest request) {
+        UUID userId = getUserId(principal);
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.createCompany(userId, request));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CompanyResponse> get(@PathVariable UUID id) {
-        return ResponseEntity.ok(companyService.getCompany(id));
+    public ResponseEntity<CompanyResponse> get(
+            Principal principal,
+            @PathVariable UUID id) {
+        UUID userId = getUserId(principal);
+        return ResponseEntity.ok(companyService.getCompany(id, userId));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CompanyResponse> update(
+            Principal principal,
             @PathVariable UUID id,
             @Valid @RequestBody UpdateCompanyRequest request
     ) {
-        return ResponseEntity.ok(companyService.updateCompany(id, request));
+        UUID userId = getUserId(principal);
+        return ResponseEntity.ok(companyService.updateCompany(id, userId, request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        companyService.deleteCompany(id);
+    public ResponseEntity<Void> delete(
+            Principal principal,
+            @PathVariable UUID id) {
+        UUID userId = getUserId(principal);
+        companyService.deleteCompany(id, userId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<Page<CompanyResponse>> list(Pageable pageable) {
-        return ResponseEntity.ok(companyService.listCompanies(pageable));
+    public ResponseEntity<Page<CompanyResponse>> list(
+            Principal principal,
+            Pageable pageable) {
+        UUID userId = getUserId(principal);
+        return ResponseEntity.ok(companyService.listCompanies(userId, pageable));
     }
 
     @GetMapping("/search")
     public ResponseEntity<Page<CompanyResponse>> search(
+            Principal principal,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String industry,
-            @RequestParam(required = false) CompanySize size,@RequestParam(required = false) Boolean isHiring,
+            @RequestParam(required = false) CompanySize size,
+            @RequestParam(required = false) Boolean isHiring,
             Pageable pageable
     ) {
+        UUID userId = getUserId(principal);
         return ResponseEntity.ok(
                 companyService.searchCompanies(
+                        userId,
                         keyword,
                         industry,
                         size,
                         isHiring,
                         pageable
                 )
-        );}
+        );
+    }
 }

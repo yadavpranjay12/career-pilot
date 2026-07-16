@@ -12,5 +12,6 @@ export const PublicRoute = () => {
     );
   }
 
-  return isAuthenticated ? <Navigate to="/" replace /> : <Outlet />;
+  // FIXED: Changed "/" to "/dashboard" to break the infinite redirect loop
+  return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />;
 };

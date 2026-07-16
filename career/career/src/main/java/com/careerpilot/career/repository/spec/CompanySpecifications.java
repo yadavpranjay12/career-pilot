@@ -4,9 +4,16 @@ import com.careerpilot.career.domain.Company;
 import com.careerpilot.career.domain.CompanySize;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.UUID;
+
 public final class CompanySpecifications {
 
     private CompanySpecifications() {}
+
+    // NEW: Ensure we only search within companies owned by this user
+    public static Specification<Company> belongsToUser(UUID userId) {
+        return (root, query, cb) -> cb.equal(root.get("userId"), userId);
+    }
 
     public static Specification<Company> nameContains(String keyword) {
         return (root, query, cb) ->
@@ -32,6 +39,5 @@ public final class CompanySpecifications {
                 isHiring == null
                         ? null
                         : cb.equal(root.get("isHiring"), isHiring);
-
     }
 }

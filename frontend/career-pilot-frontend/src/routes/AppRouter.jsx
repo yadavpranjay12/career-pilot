@@ -8,7 +8,7 @@ import { PublicRoute } from './PublicRoute';
 import { ProfilePage } from "../pages/profile/ProfilePage";
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
-
+import { Landing } from '../pages/auth/Landing';
 import { Dashboard } from '../pages/dashboard/Dashboard';
 import { Companies } from '../pages/company/Companies';
 import { Applications } from '../pages/application/Applications';
@@ -33,6 +33,10 @@ export const AppRouter = () => {
         {/* Public Routes */}
         {/* ===================== */}
         <Route element={<PublicRoute />}>
+          
+          {/* Base URL is now the Landing Page */}
+          <Route path="/" element={<Landing />} />
+
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -45,8 +49,8 @@ export const AppRouter = () => {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
 
-            {/* Dashboard */}
-            <Route path="/" element={<Dashboard />} />
+            {/* Dashboard moved to /dashboard */}
+            <Route path="/dashboard" element={<Dashboard />} />
 
             {/* Goal Module */}
             <Route path="/goals" element={<GoalPage />} />
@@ -56,30 +60,26 @@ export const AppRouter = () => {
 
             {/* Internship Application Module */}
             <Route path="/applications" element={<Applications />} />
-<Route
-    path="/problems"
-    element={<ProblemPage />}
-/>
+            
+            <Route path="/problems" element={<ProblemPage />} />
+            
             {/* Future Modules */}
-           
-<Route
-    path="/resume"
-    element={<ResumePage />}
-/>
+            <Route path="/resume" element={<ResumePage />} />
+            
             <Route
               path="/interviews"
               element={<Placeholder title="Interview Module" />}
             />
 
-           <Route
-  path="/profile"
-  element={<ProfilePage />}
-/>
+            <Route path="/profile" element={<ProfilePage />} />
 
           </Route>
         </Route>
 
+        {/* ===================== */}
         {/* Catch All */}
+        {/* ===================== */}
+        {/* Fallback now points back to the base URL */}
         <Route path="*" element={<Navigate to="/" replace />} />
 
       </Routes>
