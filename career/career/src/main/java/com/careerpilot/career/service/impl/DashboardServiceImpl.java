@@ -42,7 +42,7 @@ public class DashboardServiceImpl implements DashboardService {
                         0L
                 );
         return new DashboardResponse(
-                companyRepository.count(),
+                companyRepository.countByUserId(String.valueOf(userId)), // <--- The Fix
                 totalApplications,
                 applicationsByStatus,
                 problemRepository.countByUserIdAndStatus(userId, ProblemStatus.COMPLETED),

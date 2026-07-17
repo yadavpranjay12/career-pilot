@@ -12,7 +12,13 @@ public final class CompanySpecifications {
 
     // NEW: Ensure we only search within companies owned by this user
     public static Specification<Company> belongsToUser(String userId) {
-        return (root, query, cb) -> cb.equal(root.get("userId"), userId);
+        return (root, query, cb) -> {// If userId is missing, return a specification that matches NOTHING.
+        // This prevents the query from accidentally returning public/ghost records.
+        if (userId == null || userId.isBlank()) {
+            return cb.disjunction();
+        }
+        return cb.equal(root.get("userId"), userId);
+    };
     }
 
     public static Specification<Company> nameContains(String keyword) {

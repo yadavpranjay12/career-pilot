@@ -15,4 +15,4 @@ public interface CompanyRepository extends JpaRepository<Company, UUID>, JpaSpec
     Optional<Company> findByIdAndUserId(UUID id, String userId);
     boolean existsByIdAndUserId(UUID id, String userId);
     Page<Company> findAllByUserId(String userId, Pageable pageable);
-}
+    long countByUserId(String userId);}
