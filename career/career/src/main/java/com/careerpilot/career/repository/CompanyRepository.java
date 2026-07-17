@@ -11,8 +11,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CompanyRepository extends JpaRepository<Company, UUID>, JpaSpecificationExecutor<Company> {
-    boolean existsByNameIgnoreCaseAndUserId(String name, UUID userId);
-    Optional<Company> findByIdAndUserId(UUID id, UUID userId);
-    boolean existsByIdAndUserId(UUID id, UUID userId);
-    Page<Company> findAllByUserId(UUID userId, Pageable pageable);
+    boolean existsByNameIgnoreCaseAndUserId(String name, String userId);
+    Optional<Company> findByIdAndUserId(UUID id, String userId);
+    boolean existsByIdAndUserId(UUID id, String userId);
+    Page<Company> findAllByUserId(String userId, Pageable pageable);
 }

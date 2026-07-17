@@ -30,7 +30,7 @@ public class Company extends BaseAuditEntity {
 
     // Added userId to link the company to the specific user
     @Column(name = "user_id", nullable = false)
-    private UUID userId;
+    private String userId;
 
     // Removed unique=true so different users can have companies with the same name
     @Column(name = "name", nullable = false, length = 200)

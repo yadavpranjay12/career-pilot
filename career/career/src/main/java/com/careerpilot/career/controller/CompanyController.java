@@ -23,16 +23,20 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    // Helper method to extract User ID from the Security Principal
-    private UUID getUserId(Principal principal) {
-        return UUID.fromString(principal.getName());
+    private String getUserId(Principal principal) {
+        if (principal == null) {
+            // Log this clearly so you can see it in your terminal
+
+            throw new org.springframework.security.authentication.AuthenticationCredentialsNotFoundException("User not authenticated");
+        }
+        return principal.getName();
     }
 
     @PostMapping
     public ResponseEntity<CompanyResponse> create(
             Principal principal,
             @Valid @RequestBody CreateCompanyRequest request) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);System.out.println("Principal is: " + (principal != null ? principal.getName() : "NULL"));
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.createCompany(userId, request));
     }
 
@@ -40,7 +44,7 @@ public class CompanyController {
     public ResponseEntity<CompanyResponse> get(
             Principal principal,
             @PathVariable UUID id) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);
         return ResponseEntity.ok(companyService.getCompany(id, userId));
     }
 
@@ -50,7 +54,7 @@ public class CompanyController {
             @PathVariable UUID id,
             @Valid @RequestBody UpdateCompanyRequest request
     ) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);
         return ResponseEntity.ok(companyService.updateCompany(id, userId, request));
     }
 
@@ -58,7 +62,7 @@ public class CompanyController {
     public ResponseEntity<Void> delete(
             Principal principal,
             @PathVariable UUID id) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);
         companyService.deleteCompany(id, userId);
         return ResponseEntity.noContent().build();
     }
@@ -67,7 +71,7 @@ public class CompanyController {
     public ResponseEntity<Page<CompanyResponse>> list(
             Principal principal,
             Pageable pageable) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);
         return ResponseEntity.ok(companyService.listCompanies(userId, pageable));
     }
 
@@ -80,7 +84,7 @@ public class CompanyController {
             @RequestParam(required = false) Boolean isHiring,
             Pageable pageable
     ) {
-        UUID userId = getUserId(principal);
+        String userId = getUserId(principal);
         return ResponseEntity.ok(
                 companyService.searchCompanies(
                         userId,

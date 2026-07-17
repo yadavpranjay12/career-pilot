@@ -28,7 +28,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public CompanyResponse createCompany(UUID userId, CreateCompanyRequest request) {
+    public CompanyResponse createCompany(String userId, CreateCompanyRequest request) {
         // Scoped to check if THIS user already created a company with this name
         if (companyRepository.existsByNameIgnoreCaseAndUserId(request.name(), userId)) {
             throw new CompanyAlreadyExistsException(request.name());
@@ -52,7 +52,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional(readOnly = true)
-    public CompanyResponse getCompany(UUID id, UUID userId) {
+    public CompanyResponse getCompany(UUID id, String userId) {
         // Only fetch if the ID matches AND it belongs to the user
         return companyRepository.findByIdAndUserId(id, userId)
                 .map(CompanyMapper::toResponse)
@@ -61,7 +61,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public CompanyResponse updateCompany(UUID id, UUID userId, UpdateCompanyRequest request) {
+    public CompanyResponse updateCompany(UUID id, String userId, UpdateCompanyRequest request) {
         // Only allow update if it belongs to the user
         Company company = companyRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new CompanyNotFoundException(id));
@@ -81,7 +81,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional
-    public void deleteCompany(UUID id, UUID userId) {
+    public void deleteCompany(UUID id, String userId) {
         // Only allow delete if it belongs to the user
         if (!companyRepository.existsByIdAndUserId(id, userId)) {
             throw new CompanyNotFoundException(id);
@@ -91,7 +91,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<CompanyResponse> listCompanies(UUID userId, Pageable pageable) {
+    public Page<CompanyResponse> listCompanies(String userId, Pageable pageable) {
         // Scope the list to the logged-in user
         return companyRepository.findAllByUserId(userId, pageable)
                 .map(CompanyMapper::toResponse);
@@ -100,7 +100,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(readOnly = true)
     public Page<CompanyResponse> searchCompanies(
-            UUID userId,
+            String userId,
             String keyword,
             String industry,
             CompanySize size,

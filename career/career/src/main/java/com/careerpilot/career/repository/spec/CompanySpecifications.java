@@ -11,7 +11,7 @@ public final class CompanySpecifications {
     private CompanySpecifications() {}
 
     // NEW: Ensure we only search within companies owned by this user
-    public static Specification<Company> belongsToUser(UUID userId) {
+    public static Specification<Company> belongsToUser(String userId) {
         return (root, query, cb) -> cb.equal(root.get("userId"), userId);
     }
 
