@@ -1,31 +1,127 @@
-# CareerPilot
+# 🚀 CareerPilot
 
-CareerPilot is a backend-focused full-stack platform that helps students manage their internship and placement preparation.
+CareerPilot is a full-stack career management platform that helps students and job seekers organize their placement preparation in one place.
 
-## Tech Stack
+The platform enables users to track job applications, manage companies, solve and revise DSA problems, create resumes, manage career goals, and maintain a professional profile through a modern dashboard.
 
-- Java 21
-- Spring Boot
-- Spring Security
+
+## ✨ Features
+
+### Authentication
 - JWT Authentication
-- PostgreSQL
-- Spring Data JPA
-- React
-- Maven
-- Docker (Coming Soon)
+- Refresh Tokens
+- Secure Spring Security configuration
+- BCrypt password hashing
 
-## Planned Features
+### Dashboard
+- Career analytics
+- Application statistics
+- Goal overview
+- DSA progress
+- Offer tracking
 
-- Authentication
-- User Profile
-- Internship Tracker
-- Company Explorer
-- DSA Tracker
-- Resume Manager
-- Interview Experience
-- Goal Tracker
-- Dashboard Analytics
+### Company Management
+- Add companies
+- Update company details
+- Delete companies
+- Company search & filtering
 
-## Project Status
+### Job Applications
+- Track applications
+- Status workflow
+- Interview tracking
+- Offer management
+- Application history
 
-🚧 Currently under development.
+### Resume Manager
+- Upload resumes
+- Download resumes
+- Resume details
+- Resume version management
+
+### DSA Tracker
+- Add coding problems
+- Difficulty & topic categorization
+- Revision scheduling
+- Revision counter
+- Mark problems completed
+- Advanced filtering & search
+
+### Goals
+- Create goals
+- Active & completed goals
+- Deadlines
+- Priority management
+
+### User Profile
+- Professional profile
+- GitHub
+- LinkedIn
+- Portfolio
+- Contact information
+## ✨ Features
+
+### Authentication
+- JWT Authentication
+- Refresh Tokens
+- Secure Spring Security configuration
+- BCrypt password hashing
+
+### Dashboard
+- Career analytics
+- Application statistics
+- Goal overview
+- DSA progress
+- Offer tracking
+
+### Company Management
+- Add companies
+- Update company details
+- Delete companies
+- Company search & filtering
+
+### Job Applications
+- Track applications
+- Status workflow
+- Interview tracking
+- Offer management
+- Application history
+
+### Resume Manager
+- Upload resumes
+- Download resumes
+- Resume details
+- Resume version management
+
+### DSA Tracker
+- Add coding problems
+- Difficulty & topic categorization
+- Revision scheduling
+- Revision counter
+- Mark problems completed
+- Advanced filtering & search
+
+### Goals
+- Create goals
+- Active & completed goals
+- Deadlines
+- Priority management
+
+### User Profile
+- Professional profile
+- GitHub
+- LinkedIn
+- Portfolio
+- Contact information
+## 🏗 Architecture
+
+CareerPilot follows a microservices architecture.
+
+Services:
+
+- Authentication Service
+- Career Service
+
+Communication:
+- REST APIs
+- JWT Authentication
