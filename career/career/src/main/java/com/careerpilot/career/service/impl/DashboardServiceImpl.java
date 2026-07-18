@@ -8,6 +8,7 @@ import com.careerpilot.career.repository.*;
 import com.careerpilot.career.repository.projection.ApplicationStatusCount;
 import com.careerpilot.career.service.DashboardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,14 +36,13 @@ public class DashboardServiceImpl implements DashboardService {
 
         long totalApplications = applicationsByStatus.values().stream().mapToLong(Long::longValue).sum();
         long offerCount = applicationsByStatus.getOrDefault(ApplicationStatus.OFFER, 0L);
+        long interviewCount = applicationsByStatus.getOrDefault(ApplicationStatus.INTERVIEW, 0L);
 
-        long interviewCount =
-                applicationsByStatus.getOrDefault(
-                        ApplicationStatus.INTERVIEW,
-                        0L
-                );
+        // THE FIX: Grab the email directly from the JWT Security Context
+        String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
         return new DashboardResponse(
-                companyRepository.countByUserId(String.valueOf(userId)), // <--- The Fix
+                companyRepository.countByUserId(userEmail), // <-- Pass the exact email to the repo!
                 totalApplications,
                 applicationsByStatus,
                 problemRepository.countByUserIdAndStatus(userId, ProblemStatus.COMPLETED),

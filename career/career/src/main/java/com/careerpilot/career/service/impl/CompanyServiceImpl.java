@@ -93,6 +93,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional(readOnly = true)
     public Page<CompanyResponse> listCompanies(String userId, Pageable pageable) {
         // Scope the list to the logged-in user
+
         return companyRepository.findAllByUserId(userId, pageable)
                 .map(CompanyMapper::toResponse);
     }
