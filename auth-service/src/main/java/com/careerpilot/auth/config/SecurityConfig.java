@@ -73,7 +73,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:5173","https://career-pilot-inky-gamma.vercel.app"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173","https://career-pilot-a2lg.onrender.com"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
