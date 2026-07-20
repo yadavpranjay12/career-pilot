@@ -26,7 +26,9 @@ public class JwtService {
     private long accessExpirationMs;
 
     private SecretKey signingKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        // We are hardcoding the 256-bit string here temporarily to bypass all caches!
+        String overrideSecret = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+        return Keys.hmacShaKeyFor(overrideSecret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateAccessToken(User user) {

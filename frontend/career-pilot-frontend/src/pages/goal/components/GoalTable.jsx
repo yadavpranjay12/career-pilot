@@ -152,13 +152,15 @@ export const GoalTable = ({
                       <FiEye />
                     </button>
 
-                    <button
-                      onClick={() => onEdit(goal)}
-                      className="p-2 rounded-lg text-slate-400 hover:text-orange-600 hover:bg-orange-50 transition-colors"
-                      title="Edit"
-                    >
-                      <FiEdit2 />
-                    </button>
+                    {goal.status === "ACTIVE" && (
+  <button
+    onClick={() => onEdit(goal)}
+    className="p-2 rounded-lg text-slate-400 hover:text-orange-600 hover:bg-orange-50 transition-colors"
+    title="Edit"
+  >
+    <FiEdit2 />
+  </button>
+)}
 
                     {goal.status === "ACTIVE" && (
                       <>

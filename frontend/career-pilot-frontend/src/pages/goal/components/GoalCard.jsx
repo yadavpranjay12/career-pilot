@@ -88,53 +88,36 @@ export const GoalCard = ({
 
             </div>
 
-            <div className="flex justify-end gap-4 mt-5">
+           <div className="flex justify-end gap-4 mt-5">
+  {/* View Button: Always visible */}
+  <button onClick={() => onView(goal)}>
+    <FiEye />
+  </button>
 
-              <button
-                onClick={() =>
-                  onView(goal)
-                }
-              >
-                <FiEye />
-              </button>
+  {/* Pen/Edit Button: Removed if Completed or Cancelled */}
+  {goal.status === "ACTIVE" && (
+    <button onClick={() => onEdit(goal)}>
+      <FiEdit2 />
+    </button>
+  )}
 
-              <button
-                onClick={() =>
-                  onEdit(goal)
-                }
-              >
-                <FiEdit2 />
-              </button>
+  {/* Progress and Cancel Buttons: Removed if Completed or Cancelled */}
+  {goal.status === "ACTIVE" && (
+    <>
+      <button onClick={() => onUpdateProgress(goal)}>
+        <FiTrendingUp />
+      </button>
+      <button onClick={() => onCancelGoal(goal.id)}>
+        <FiXCircle />
+      </button>
+    </>
+  )}
 
-              {goal.status === "ACTIVE" && (
-                <>
-                  <button
-                    onClick={() =>
-                      onUpdateProgress(goal)
-                    }
-                  >
-                    <FiTrendingUp />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      onCancelGoal(goal.id)
-                    }
-                  >
-                    <FiXCircle />
-                  </button>
-                </>
-              )}
-
-              <button
-                onClick={() =>
-                  onDelete(goal.id)
-                }
-              >
-                <FiTrash2 />
-              </button>
-
-            </div>
+  {/* Delete Button: Always visible */}
+  <button onClick={() => onDelete(goal.id)}>
+    <FiTrash2 />
+  </button>
+</div>
 
           </div>
         );

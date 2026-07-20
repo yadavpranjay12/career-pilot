@@ -80,6 +80,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
     }
 
     private Key getSigningKey() {
-        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return Keys.hmacShaKeyFor(keyBytes);
-}}
+        // Hardcoding the exact same 256-bit string used in Auth Service
+        String overrideSecret = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
+        return Keys.hmacShaKeyFor(overrideSecret.getBytes(StandardCharsets.UTF_8));
+    }}
