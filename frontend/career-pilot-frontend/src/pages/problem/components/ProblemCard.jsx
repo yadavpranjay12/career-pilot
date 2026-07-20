@@ -89,13 +89,11 @@ export const ProblemCard = ({
               <FiEye />
             </button>
 
-            <button
-              onClick={() =>
-                onEdit(problem)
-              }
-            >
-              <FiEdit2 />
-            </button>
+            {problem.status !== "COMPLETED" && (
+    <button onClick={() => onEdit(problem)}>
+      <FiEdit2 />
+    </button>
+  )}
 
             {problem.status !==
               "COMPLETED" && (

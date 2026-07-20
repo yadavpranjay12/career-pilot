@@ -168,14 +168,14 @@ export const ProblemTable = ({
                     <FiEye />
                   </button>
 
-                  <button
-                    onClick={() =>
-                      onEdit(problem)
-                    }
-                    className="p-2 rounded-lg hover:bg-orange-50 hover:text-orange-600"
-                  >
-                    <FiEdit2 />
-                  </button>
+                {problem.status !== "COMPLETED" && (
+    <button
+      onClick={() => onEdit(problem)}
+      className="p-2 rounded-lg hover:bg-orange-50 hover:text-orange-600"
+    >
+      <FiEdit2 />
+    </button>
+  )}
 
                   {problem.status !==
                     "COMPLETED" && (
